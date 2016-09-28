@@ -1,7 +1,7 @@
 {
-  "name": "koa-graphiql",
-  "version": "1.1.0",
-  "description": "Koa middleware to display GraphiQL",
+  "name": "koa-custom-graphiql",
+  "version": "0.0.0",
+  "description": "Koa middleware to display GraphiQL your own custom GraphiQL",
   "main": "lib/middleware.js",
   "files": [
     "lib"
@@ -11,28 +11,31 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/exponentjs/koa-graphiql.git"
+    "url": "git+https://github.com/stems/koa-graphiql.git"
   },
   "keywords": [
     "koa",
     "middleware",
+    "custom",
     "graphql",
     "graphiql"
   ],
   "engines": {
-    "node": ">=4"
+    "node": ">=6"
   },
-  "author": "James Ide",
+  "author": "Andrew Carlson <acarl005@g.ucla.edu>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/exponentjs/koa-graphiql/issues"
+    "url": "https://github.com/stems/koa-graphiql/issues"
   },
-  "homepage": "https://github.com/exponentjs/koa-graphiql#readme",
+  "homepage": "https://github.com/stems/koa-graphiql#readme",
+  "peerDependencies": {
+    "koa": "^1.2.4"
+  },
   "devDependencies": {
     "babel-core": "^6.2.1",
     "babel-plugin-syntax-flow": "^6.1.18",
-    "babel-plugin-transform-es2015-modules-commonjs": "^6.2.0",
     "babel-plugin-transform-flow-strip-types": "^6.1.18",
-    "babel-preset-stage-3": "^6.1.18"
+    "babel-preset-node6": "^11.0.0"
   }
 }

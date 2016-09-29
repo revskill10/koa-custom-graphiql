@@ -1,6 +1,6 @@
 {
   "name": "koa-custom-graphiql",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Koa middleware to display GraphiQL your own custom GraphiQL",
   "main": "lib/middleware.js",
   "files": [

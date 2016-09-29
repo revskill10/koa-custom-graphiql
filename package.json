@@ -34,9 +34,9 @@
     "koa": "^1.2.4"
   },
   "devDependencies": {
+    "babel-cli": "^6.16.0",
     "babel-core": "^6.2.1",
-    "babel-plugin-syntax-flow": "^6.1.18",
-    "babel-plugin-transform-flow-strip-types": "^6.1.18",
-    "babel-preset-node6": "^11.0.0"
+    "babel-preset-node6": "^11.0.0",
+    "babel-preset-stage-0": "^6.16.0"
   }
 }

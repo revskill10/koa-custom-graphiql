@@ -1,24 +1,16 @@
-/**
- * @flow
- */
-type Options = {
-  url: ?string;
-  query: ?string;
-  variables: ?Object;
-  result?: Object;
-}
-type GetOptions = (ctx: Object) => Promise<Options>|Options
-
 // Current latest version of GraphiQL
 const GRAPHIQL_VERSION = '0.7.3'
 
-export default function createMiddleware(getOptions: ?GetOptions) {
+export default function createMiddleware(getOptions) {
   return async function middleware() {
     const options = getDefaultOptions(this)
-    if (getOptions) {
-      const overrides = getOptions(this)
-      Object.assign(options, typeof overrides.then === 'function' ? await overrides : overrides)
+    let overrides = {}
+    if (typeof getOptions === 'function') {
+      overrides = getOptions(this)
+    } else if (typeof getOptions === 'object') {
+      overrides = getOptions
     }
+    Object.assign(options, typeof overrides.then === 'function' ? (await overrides) : overrides)
 
     this.body = renderHtml(options)
     this.type = 'text/html'
@@ -51,7 +43,7 @@ function getDefaultOptions(ctx) {
 /**
  * See express-graphql for the original implementation
  */
-function renderHtml(options: Options): string {
+function renderHtml(options) {
   const queryString = options.query
   const variablesString = options.variables ?
     JSON.stringify(options.variables, null, 2) :

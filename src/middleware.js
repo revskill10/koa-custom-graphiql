@@ -111,6 +111,7 @@ function renderHtml(options) {
     var fetchURL = ${JSON.stringify(options.url)} + locationQuery(otherParams)
     // Defines a GraphQL fetcher using the fetch API.
     function graphQLFetcher(graphQLParams) {
+      let headers = {}
       return fetch(fetchURL, {
         method: 'post',
         headers: {
@@ -119,18 +120,22 @@ function renderHtml(options) {
         },
         body: JSON.stringify(graphQLParams),
         credentials: 'include',
-      }).then(function (response) {
-        const headers = {}
+      }).then(function(response) {
         for (let header of response.headers.entries()) {
           headers[header[0]] = decodeURIComponent(header[1])
         }
-        return response.json().then(data => {
-          Object.defineProperty(data, '_headers', {
+        return response.text()
+      }).then(function(respText) {
+        try {
+          const body = JSON.parse(respText)
+          Object.defineProperty(body, '_headers', {
             value: headers,
             enumberable: false
           })
-          return data
-        })
+          return body
+        } catch (e) {
+          return respText
+        }
       })
     }
     // When the query and variables string is edited, update the URL bar so

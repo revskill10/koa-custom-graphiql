@@ -120,7 +120,17 @@ function renderHtml(options) {
         body: JSON.stringify(graphQLParams),
         credentials: 'include',
       }).then(function (response) {
-        return response.json()
+        const headers = {}
+        for (let header of response.headers.entries()) {
+          headers[header[0]] = decodeURIComponent(header[1])
+        }
+        return response.json().then(data => {
+          Object.defineProperty(data, '_headers', {
+            value: headers,
+            enumberable: false
+          })
+          return data
+        })
       })
     }
     // When the query and variables string is edited, update the URL bar so

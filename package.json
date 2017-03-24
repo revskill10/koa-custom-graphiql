@@ -1,6 +1,6 @@
 {
   "name": "koa-custom-graphiql",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Koa middleware to display GraphiQL your own custom GraphiQL",
   "main": "lib/middleware.js",
   "files": [
@@ -31,7 +31,7 @@
   },
   "homepage": "https://github.com/stems/koa-graphiql#readme",
   "peerDependencies": {
-    "koa": "^1.2.4"
+    "koa": "^1.2.4 || ^2.0.0"
   },
   "devDependencies": {
     "babel-cli": "^6.16.0",

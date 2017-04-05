@@ -1,19 +1,25 @@
+'use strict'
+
 // Current latest version of GraphiQL
-const GRAPHIQL_VERSION = '0.7.3'
+const GRAPHIQL_VERSION = '0.9.3'
 
 export default function createMiddleware(getOptions) {
-  return async function middleware() {
-    const options = getDefaultOptions(this)
+  return async function middleware(ctx) {
+    // koa 1 binds the context to this rather than passing as an arg. we want to try to support both
+    if (this && this.request) {
+      ctx = this
+    }
+    const options = getDefaultOptions(ctx)
     let overrides = {}
     if (typeof getOptions === 'function') {
-      overrides = getOptions(this)
+      overrides = getOptions(ctx)
     } else if (typeof getOptions === 'object') {
       overrides = getOptions
     }
     Object.assign(options, typeof overrides.then === 'function' ? (await overrides) : overrides)
 
-    this.body = renderHtml(options)
-    this.type = 'text/html'
+    ctx.body = renderHtml(options)
+    ctx.type = 'text/html'
   }
 }
 

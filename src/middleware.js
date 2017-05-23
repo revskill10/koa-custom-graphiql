@@ -148,11 +148,11 @@ function renderHtml(options) {
     // that it can be easily shared.
     function onEditQuery(newQuery) {
       parameters.query = newQuery
-      updateURL()
+      ${process.env.NODE_ENV === 'production' ? '//' : ''} updateURL()
     }
     function onEditVariables(newVariables) {
       parameters.variables = newVariables
-      updateURL()
+      ${process.env.NODE_ENV === 'production' ? '//' : ''} updateURL()
     }
     function updateURL() {
       history.replaceState(null, null, locationQuery(parameters))
